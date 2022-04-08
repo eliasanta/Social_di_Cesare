@@ -1,0 +1,151 @@
+<html>
+    <head>
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    
+        <script src="js/request.js"></script>
+        <script src="js/posts.js"></script>
+        <script src="js/albumImg.js"></script>
+        <script src="js/albums.js"></script>
+        <script src="js/todo.js"></script>
+        <script src="js/comments.js"></script>
+        <script src="js/cesare.js"></script> 
+        <script src="js/script.js"></script>
+
+        <link rel="stylesheet" href="css/styleCss.css">
+    </head>
+    <body>
+    
+        <div class="container-fluid">
+            <div class="row"> 
+                <div class="col-md-10 offset-1 col-sm-12" style="height: 50px;text-align: center;">
+                    <div class="spinner-border" role="status" style="display:'none'; margin:auto">
+                    <span class="visually-hidden">Attendere...</span>
+                </div>
+            </div>
+            <div class="row"> 
+                <div class="col-md-10 offset-1 col-sm-12">
+                    <h2>Lista di Utenti</h2>
+                    <table class="table table-responsive table-striped">
+                        <thead>
+                            <tr><th>Nome</th><th>Indirizzo</th><th>Azioni</th></tr>
+                        </thead>
+                        <tbody id="userList"></tbody>
+                    </table>         
+                </div> 
+            </div>
+
+            <div class="row" id="postDiv" style="display: none;">
+                <h3>Lista Di post</h3>
+                <div class="col-md-12 col-sm-12">
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <!--<th>Data</th> -->
+                                <th>Nome</th>
+                                <th>Descrizione</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="postList"></tbody>
+                    </table>
+                </div>
+            </div> 
+
+            <div class="row"  id="albumDiv" style="display: none;"> 
+                <div class="col-md-12 col-sm-12"> 
+                    <h3 id="titlealbums">Lista di albums</h3>
+                    <div>
+                        <table class="table table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>Nome Album</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="albumList"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row"  id="todoListDiv" style="display: none;"> 
+                <div class="col-md-12 col-sm-12">  
+                    <h3 id="titleTodo">Lista di cose da fare</h3>
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Descrizione</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableTodo"></tbody>
+                    </table>
+                </div>
+            </div> 
+        </div> 
+
+        <div class="modal fade" id="addPostModal" tabindex="-1" aria-labelledby="addPostModaLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form onsubmit="post.addPost(); return false">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Scrivi Nuovo Post</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> 
+                        <div class="modal-body">  
+                            <input type="hidden" id="userID" />
+                            <div class="form-group">
+                                <label>Inserisci il Titolo</label>
+                                <input  type="text" id="name"  class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Inserisci la descrizione</label>
+                                <input type="text" id="description" class="form-control" /> 
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CHIUDI</button>
+                            <button type="submit" class="btn btn-primary"   data-bs-dismiss="modal" >SALVA</button>
+                        </div>
+                    </form> 
+                </div>
+            </div>
+        </div> 
+
+        <div class="modal fade" id="viewImage" tabindex="-1" aria-labelledby="viewImageLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content"> 
+                        <div class="modal-header">
+                            <h5 class="modal-title">Lista Immagini</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> 
+                        <div class="modal-body">
+                            <div id="detailAlbumList" class="row"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CHIUDI</button> 
+                        </div> 
+                </div>
+            </div>
+        </div> 
+
+        <div class="modal fade" id="viewComments" tabindex="-1" aria-labelledby="viewCommentsLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content"> 
+                        <div class="modal-header">
+                            <h5 class="modal-title">Lista Commenti</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> 
+                        <div class="modal-body">
+                            <table id="comments" class="table-responsive table-striped"></table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CHIUDI</button> 
+                        </div> 
+                </div>
+            </div>
+        </div> 
+
+    </body>
+</html>

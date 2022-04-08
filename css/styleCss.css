@@ -1,0 +1,16 @@
+body{
+    font: 15px black Arial, sans-serif;
+}
+.btn{
+    margin: auto 4px;
+}
+table tr{
+    text-align: center;
+}
+h1,h2,h3,h4{
+    text-align: center;
+    margin-top: 30px;
+}
+#detailAlbumList .col-md-2, #detailAlbumList .col-sm-12{
+    margin-top: 6px;
+}
