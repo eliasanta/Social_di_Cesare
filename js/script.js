@@ -1,6 +1,3 @@
-/**
- * Supponiamo di voler gestire un social per utenti. 
-Questo social tiene molto alla privacy dei propri utenti, pertanto ha deciso che nella lista di utenti il loro nome deve essere sostituito 
      
 //variabili const. Queste sono le URL delle API e non devono essere modificate
 const URL_USERS = "https://jsonplaceholder.typicode.com/users";
